@@ -1,0 +1,50 @@
+const double eps = 1e-6;
+        struct tacka
+        {
+            public double x;
+            public double y;
+            public tacka(double x, double y)
+            {
+                this.x = x;
+                this.y = y;
+            }
+        }
+
+static double povrsinatrougla(double x1, double y1, double x2, double y2, double x3, double y3) { 
+        
+            return (Math.Abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)))/2.00;
+        }
+static void Main(string[] args)
+        {
+
+            double x = double.Parse(Console.ReadLine());
+            double y = double.Parse(Console.ReadLine());
+            tacka a = new tacka(x, y);
+
+            x = double.Parse(Console.ReadLine());
+            y = double.Parse(Console.ReadLine());
+           tacka b = new tacka(x, y);
+
+            x = double.Parse(Console.ReadLine());
+            y = double.Parse(Console.ReadLine());
+            tacka c = new tacka(x, y);
+
+            x = double.Parse(Console.ReadLine());
+            y = double.Parse(Console.ReadLine());
+            tacka t = new tacka(x, y);
+
+            double povrsinaabc = povrsinatrougla(a.x, a.y, b.x, b.y,c.x, c.y);
+
+            double povrsinaabt = povrsinatrougla(a.x, a.y, b.x, b.y, t.x, t.y);
+            double povrsinacbt = povrsinatrougla(c.x, c.y, b.x, b.y, t.x, t.y);
+            double povrsinaact = povrsinatrougla(a.x, a.y, c.x, c.y, t.x, t.y);
+
+            Console.WriteLine("|{0} *({1}-{2})+{3}*({4}-{5})+{6}*({7}-{8})|/2={9}",a.x,b.y,c.y,b.x,c.y,a.y,c.x,a.y,b.y,(Math.Abs(a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))) / 2.00);
+            Console.WriteLine("{0}-({1}+{2}+{3})={4}", povrsinaabc, povrsinaabt, povrsinaact, povrsinacbt,Math.Abs( povrsinaabc - (povrsinaabt + povrsinaact + povrsinacbt)));
+            if (Math.Abs(povrsinaabc - (povrsinaabt + povrsinaact + povrsinacbt)) < eps) Console.WriteLine("da");
+            else Console.WriteLine("ne");
+
+         Console.ReadKey();
+        }
+    }
+}
