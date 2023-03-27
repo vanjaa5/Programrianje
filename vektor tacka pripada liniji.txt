@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication58
+{
+    class Program
+    {
+
+        struct tacka {
+            public int x;
+            public int y;
+            public tacka(int x, int y) {
+                this.x = x;
+                this.y = y;
+            }
+
+        }
+        struct vektor
+        {
+            public int x;
+            public int y;
+            public int z;
+            public vektor(int x, int y,int z)
+            {
+                this.x = x;
+                this.y = y;
+                this.z = z;
+            }
+
+        }
+        static bool kolinearan(tacka a,tacka b,tacka c) {
+            int x1 = b.x - a.x;
+            int x2 = c.x - a.x;
+            int y1 = b.y - a.y;
+            int y2 = c.y - a.y;
+            vektor pom = vektorski(x1,y1,0,x2,y2,0);
+            int x=pom.x;
+            int y=pom.y;
+            int z = pom.z;
+            if (pom.x == 0 && pom.y == 0 && pom.z == 0) return true;
+            else return false;
+        }
+
+        static vektor vektorski(int x1, int y1, int z1, int x2, int y2, int z2) {
+
+            int x = y1 * z2 - y2 * z1;
+            int y = z1 * x2 - x1 * z2;
+            int z = x1 * y2 - x2 * y1;
+            return new vektor(x, y, z);
+        
+        }
+
+        static void Main(string[] args)
+        {
+            int x = int.Parse(Console.ReadLine());
+            int y = int.Parse(Console.ReadLine());
+        
+            tacka a= new tacka(x,y);
+            x=int.Parse(Console.ReadLine());
+            y=int.Parse(Console.ReadLine());
+            tacka b = new tacka(x, y);
+
+            int n = int.Parse(Console.ReadLine());
+            int br = 0;
+            for (int i = 0; i < n; i++) {
+                x = int.Parse(Console.ReadLine());
+                y = int.Parse(Console.ReadLine());
+                if(kolinearan(a, b, new tacka(x, y)))br++;
+            }
+
+
+            Console.WriteLine(br);
+            Console.ReadKey();
+        }
+    }
+}
