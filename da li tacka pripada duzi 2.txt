@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace vektori
+{
+    class Program
+    {
+
+        struct vektor
+        {
+            public int x;
+            public int y;
+            public int z;
+
+            public vektor(int x,int y,int z)
+            {
+                this.x = x;
+                this.y = y;
+                this.z = z;
+            }
+        }
+        struct tacka
+        {
+            public int x;
+            public int y;
+
+            public tacka(int x, int y)
+            {
+                this.x = x;
+                this.y = y;
+            }
+        }
+        static int skalar(vektor a, vektor b)
+        {
+            return a.x * b.x + a.y * b.y + a.z * b.z;
+        }
+
+        static vektor vektorski(vektor a,vektor b)
+        {
+            int x = a.y * b.z - a.z * b.y;
+            int y = a.z * b.x - a.x * b.z;
+            int z = a.x * b.y - a.y * b.x;
+
+            return new vektor(x, z, y);
+        }
+
+
+        static void Main(string[] args)
+        {
+            int x = int.Parse(Console.ReadLine());
+            int y = int.Parse(Console.ReadLine());
+         
+                tacka a = new tacka(x, y);
+            
+            x = int.Parse(Console.ReadLine());
+            y = int.Parse(Console.ReadLine());
+
+            tacka b = new tacka(x, y);
+            int n = int.Parse(Console.ReadLine());
+            int br = 0;
+            for (int i = 0; i < n; i++)
+            {
+                x = int.Parse(Console.ReadLine());
+                y = int.Parse(Console.ReadLine());
+                vektor c = vektorski(new vektor(b.x - a.x, b.y - a.y, 0), new vektor(x - a.x, y-a.y, 0));
+                if (c.x == 0 && c.y == 0 && c.z == 0) br++;
+
+            }
+            Console.WriteLine(br);
+            Console.ReadKey();
+        }
+    }
+}
